@@ -89,7 +89,7 @@ Was die Parameter im Einzelnen bedeuten, besprechen wir natürlich im Workshop!
 Führe in Deinem Arbeitsverzeichnis die folgenden Befehle aus:
 
 ```bash
-ng new book-rating --routing --style=scss --prefix=br
+ng new book-rating --routing --style=scss
 cd book-rating
 ng serve
 ```
