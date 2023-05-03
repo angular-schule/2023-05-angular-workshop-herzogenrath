@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from '../shared/book';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-book',
@@ -11,14 +12,5 @@ import { Book } from '../shared/book';
 })
 export class BookComponent {
 
-  @Input({ required: true })
-  book?: Book;
-
-  constructor() {
-    console.log('Das Buch ist im Kontruktor', this.book)
-  }
-
-  ngOnInit() {
-    console.log('Das Buch ist in der ngOnInit', this.book)
-  }
+  @Input({ required: true }) book?: Book;
 }
