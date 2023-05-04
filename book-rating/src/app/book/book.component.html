@@ -1,7 +1,7 @@
 <div class="card mb-4" *ngIf="book">
   <div class="card-body bg-light">
       <img class="img-thumbnail float-end"
-        src="//api.angular.schule/avatar/{{ book.rating }}">
+        src="//api.angular.schule/avatar/{{ book.rating }}" alt="">
     <div class="card-title">
       <h2>
         {{ book.title }}
@@ -10,18 +10,8 @@
     </div>
     <p>{{ book.description }}</p>
 
-    <!--
-      BAD PRACTICES!
-
-      1. Logik im Template! Schlecht Wartbar, schwer zu finden
-      2. Seperation of Concerns verletzt
-      3. Buch mutiert
-
-      4. Keine Grenzwerte
-
-    -->
-    <button class="btn btn-primary me-2" (click)="book.rating = book.rating - 1">-1</button>
-    <button class="btn btn-primary" (click)="book.rating = book.rating + 1">+1</button>
+    <button class="btn btn-primary me-2" (click)="doRateDown()">-1</button>
+    <button class="btn btn-primary" (click)="doRateUp()">+1</button>
   </div>
 </div>
 
