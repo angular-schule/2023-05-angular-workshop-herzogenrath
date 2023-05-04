@@ -2,5 +2,6 @@
 
 $primary: #C3002F;
 $enable-rounded: false;
+$enable-negative-margins: true; // z.b. mt-n5
 
 @import '@angular-schule/workshop-styles/index';
