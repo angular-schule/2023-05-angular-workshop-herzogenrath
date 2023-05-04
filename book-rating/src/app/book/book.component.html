@@ -10,8 +10,18 @@
     </div>
     <p>{{ book.description }}</p>
 
-    <button class="btn btn-primary me-2">-1</button>
-    <button class="btn btn-primary">+1</button>
+    <!--
+      BAD PRACTICES!
+
+      1. Logik im Template! Schlecht Wartbar, schwer zu finden
+      2. Seperation of Concerns verletzt
+      3. Buch mutiert
+
+      4. Keine Grenzwerte
+
+    -->
+    <button class="btn btn-primary me-2" (click)="book.rating = book.rating - 1">-1</button>
+    <button class="btn btn-primary" (click)="book.rating = book.rating + 1">+1</button>
   </div>
 </div>
 
