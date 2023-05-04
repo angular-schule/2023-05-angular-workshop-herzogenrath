@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { CommonModule, JsonPipe, NgFor } from '@angular/common';
-import { Book } from '../shared/book';
+import { JsonPipe, NgFor } from '@angular/common';
+import { Component, inject } from '@angular/core';
+
 import { BookComponent } from '../book/book.component';
+import { Book } from '../shared/book';
+import { BookRatingService } from '../shared/book-rating.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +13,8 @@ import { BookComponent } from '../book/book.component';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+
+  br = inject(BookRatingService);
 
   books: Book[] = [{
     isbn: '000',
