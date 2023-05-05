@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
-import { Component, Input } from '@angular/core';
+import { Component, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BookComponent } from '../book/book.component';
 import { BookRatingService } from '../shared/book-rating.service';
 import { Book } from '../shared/book';
@@ -17,7 +17,7 @@ export class DummyBookComponent {
 }
 
 
-describe('DashboardComponent', () => {
+fdescribe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
@@ -35,8 +35,11 @@ describe('DashboardComponent', () => {
       }]
     })
     .overrideComponent(DashboardComponent, {
-      remove: { imports: [BookComponent] },
-      add: { imports: [DummyBookComponent] }
+      // remove: { imports: [BookComponent] },
+      // add: { imports: [DummyBookComponent] }
+
+      set: { imports: [], schemas: [NO_ERRORS_SCHEMA] },
+
     });
 
     fixture = TestBed.createComponent(DashboardComponent);

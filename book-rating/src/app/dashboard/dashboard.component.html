@@ -4,6 +4,7 @@
   *ngFor="let b of books"
   [book]="b"
   (rateUp)="doRateUp($event)"
-  (rateDown)="doRateDown($event)"
+  (rateDown)="doRateDown"
 />
 
+Anzahl der Bücher: {{ books.length }}

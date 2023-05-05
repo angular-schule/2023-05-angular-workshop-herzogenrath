@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Book } from '../shared/book';
 
@@ -8,7 +8,8 @@ import { Book } from '../shared/book';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './book.component.html',
-  styleUrls: ['./book.component.scss']
+  styleUrls: ['./book.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookComponent {
 
@@ -23,5 +24,9 @@ export class BookComponent {
 
   doRateDown() {
     this.rateDown.emit(this.book);
+  }
+
+  log() {
+    console.log('CD', +new Date())
   }
 }

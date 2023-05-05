@@ -1,5 +1,5 @@
 import { JsonPipe, NgFor } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { BookComponent } from '../book/book.component';
 import { Book } from '../shared/book';
@@ -10,11 +10,16 @@ import { BookRatingService } from '../shared/book-rating.service';
   standalone: true,
   imports: [NgFor, JsonPipe, BookComponent],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent {
 
   br = inject(BookRatingService);
+
+  constructor() {
+    // setTimeout(() => this.books = [], 3000)
+  }
 
   books: Book[] = [{
     isbn: '000',
