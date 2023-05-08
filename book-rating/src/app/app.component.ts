@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   styleUrls: ['./app.component.scss'],
   imports: [
     RouterOutlet,
-    DashboardComponent
+    // DashboardComponent
   ]
 })
 export class AppComponent {
