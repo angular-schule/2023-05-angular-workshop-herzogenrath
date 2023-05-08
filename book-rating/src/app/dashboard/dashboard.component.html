@@ -1,4 +1,4 @@
-<app-book-create />
+<app-book-create (create)="addBook($event)"/>
 
 <app-book
   *ngFor="let b of books"
