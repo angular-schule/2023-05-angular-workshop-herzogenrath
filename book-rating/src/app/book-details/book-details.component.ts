@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Book, BooksslowService } from '../shared/http';
 
 @Component({
   selector: 'app-book-details',
@@ -11,5 +12,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export default class BookDetailsComponent {
 
-  @Input() isbn?: string;
+  bs = inject(BooksslowService);
+  book?: Book;
+
+  @Input()
+  public set isbn(value: string) {
+    this.bs.booksIsbnSlowGet(value).subscribe(b => this.book = b)
+  }
 }
