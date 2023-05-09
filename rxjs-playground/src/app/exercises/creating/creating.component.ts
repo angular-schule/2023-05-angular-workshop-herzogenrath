@@ -24,7 +24,14 @@ export class CreatingComponent {
 
     /******************************/
 
-    
+
+    of('😎', '😎', '😎').subscribe(
+      e => this.log(e),
+      err => this.log('ERROR' + err),
+      () => this.log('COMPLETE')
+    )
+
+
     /******************************/
   }
 
