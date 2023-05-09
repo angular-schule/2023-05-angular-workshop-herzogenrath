@@ -20,11 +20,15 @@ export class BookComponent {
   @Input({ required: true }) book?: Book;
 
   doRateUp() {
-    this.rateUp.emit(this.book);
+    if (this.book) {
+      this.rateUp.next(this.book);
+    }
   }
 
   doRateDown() {
-    this.rateDown.emit(this.book);
+    if (this.book) {
+      this.rateDown.next(this.book);
+    }
   }
 
   log() {

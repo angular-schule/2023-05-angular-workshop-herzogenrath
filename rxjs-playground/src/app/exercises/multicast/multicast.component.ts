@@ -1,15 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Subject, BehaviorSubject, ReplaySubject, Observable, share, takeUntil } from 'rxjs';
+import { Subject, BehaviorSubject, ReplaySubject, Observable, share, takeUntil, shareReplay, take } from 'rxjs';
 
 import { MeasureValuesService } from './measure-values.service';
 import { ExerciseService } from '../exercise.service';
 import { HistoryComponent } from '../../shared/history/history.component';
-import { NgFor, AsyncPipe, DecimalPipe } from '@angular/common';
+import { NgFor, AsyncPipe, DecimalPipe, JsonPipe } from '@angular/common';
 
 @Component({
   templateUrl: './multicast.component.html',
   standalone: true,
-  imports: [NgFor, HistoryComponent, AsyncPipe, DecimalPipe]
+  imports: [NgFor, HistoryComponent, AsyncPipe, DecimalPipe, JsonPipe]
 })
 export class MulticastComponent implements OnDestroy {
 
@@ -21,7 +21,24 @@ export class MulticastComponent implements OnDestroy {
 
   constructor(private mvs: MeasureValuesService, private es: ExerciseService) {
     /**************!!**************/
-    this.measureValues$ = this.mvs.getValues();
+
+    // 1. unchanged (cold)
+    // this.measureValues$ = this.mvs.getValues();
+
+    // 2. share --> Subject (hot)
+    //this.measureValues$ = this.mvs.getValues().pipe(share());
+
+    // 3. shareReplay ---> ReplaySubject(X)
+    this.measureValues$ = this.mvs.getValues().pipe(shareReplay({
+      bufferSize: 1,
+      refCount: true
+    }),
+    take(3));
+
+
+    // this.measureValues$ = new ReplaySubject<number>(1);
+    // this.mvs.getValues().subscribe(this.measureValues$)
+
     /**************!!**************/
 
   }
