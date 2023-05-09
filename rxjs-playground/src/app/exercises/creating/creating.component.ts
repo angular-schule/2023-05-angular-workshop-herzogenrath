@@ -24,19 +24,35 @@ export class CreatingComponent {
 
     /******************************/
 
-    // 2. Oberver
+    // 2. Observer
     const observer = {
       next: (e: string) => this.log(e),
-      error: (err: any) => this.log('ERROR' + err),
+      error: (err: any) => this.log('ERROR ' + err),
       complete: () => this.log('COMPLETE')
     }
 
     // 1. Observable
-    const observable = of('😎', '😎', '😎')
+    // const observable = of('😎', '😎', '😎')
+    const observable = new Observable<string>(subscriber => { // 4. Subscriber
+
+      subscriber.next('😎');
+      const x = setTimeout(() => subscriber.next('🤩'), 1000);
+      const y = setTimeout(() => { subscriber.next('🧐'); this.log('ZOMBIE CODE! 🧟‍♂️🧟🧟'); }, 2000);
+      const z = setTimeout(() => subscriber.error('Etwas ist schief gelaufen!'), 3000);
+      const ö = setTimeout(() => subscriber.next('Test'), 4000);
+
+
+      return () => {
+        this.log('Hilfe die Zombies kommen! Schnell aufräumen!');
+        clearTimeout(x);
+        clearTimeout(y);
+        clearTimeout(z);
+      }
+    });
 
     // 3. Subscription
     const subscription = observable.subscribe(observer);
-    subscription.unsubscribe();
+    setTimeout(() => subscription.unsubscribe(), 1000);
 
     /******************************/
   }
