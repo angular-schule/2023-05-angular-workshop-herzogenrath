@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
@@ -11,5 +11,5 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export default class BookDetailsComponent {
 
-  isbn = inject(ActivatedRoute).snapshot.paramMap.get('isbn')
+  @Input() isbn?: string;
 }
