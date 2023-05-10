@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, retry, switchMap } from 'rxjs/operators';
 
 import { BooksslowService } from '../shared/http';
 
@@ -22,6 +22,10 @@ export default class BookDetailsComponent {
   book$ = inject(ActivatedRoute).paramMap.pipe(
     map(paramMap => paramMap.get('isbn') || ''),
     switchMap(isbn => this.bs.booksIsbnSlowGet(isbn).pipe(
+      retry({
+        count: 3,
+        delay: 1000
+      }),
       catchError((err: HttpErrorResponse) => of({
         isbn: '000',
         title: 'FEHLER',
