@@ -6,6 +6,8 @@ import { BookComponent } from '../book/book.component';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
 import { BooksService } from '../shared/http';
+import { Store } from '@ngrx/store';
+import { BookActions } from '../store/book.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,8 +24,8 @@ export class DashboardComponent {
 
   books: Book[] = [];
 
-  constructor() {
-    this.bs.booksGet().subscribe(books => this.books = books);
+  constructor(store: Store) {
+    store.dispatch(BookActions.loadBooks())
   }
 
   doRateUp(book: Book) {
