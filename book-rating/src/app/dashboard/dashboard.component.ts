@@ -23,22 +23,16 @@ export class DashboardComponent {
   books$ = inject(Store).selectSignal(selectBooks);
   loading$ = inject(Store).selectSignal(selectLoading);
 
-  constructor(store: Store) {
-    store.dispatch(BookActions.loadBooks())
+  constructor(private store: Store) {
+    this.store.dispatch(BookActions.loadBooks())
   }
 
   doRateUp(book: Book) {
-    // const ratedBook = this.br.rateUp(book);
-    // // const ratedBook = {
-    // //   ...book,
-    // //   rating: book.rating < 5 ? book.rating + 1 : 5
-    // // };
-    // this.updateAndSort(ratedBook);
+    this.store.dispatch(BookActions.rateUp({ book }));
   }
 
   doRateDown(book: Book) {
-    // const ratedBook = this.br.rateDown(book);
-    // this.updateAndSort(ratedBook);
+    this.store.dispatch(BookActions.rateDown({ book }));
   }
 
   updateAndSort(ratedBook: Book) {
