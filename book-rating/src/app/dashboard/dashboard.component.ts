@@ -1,5 +1,5 @@
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { BookCreateComponent } from '../book-create/book-create.component';
 import { BookComponent } from '../book/book.component';
@@ -16,7 +16,7 @@ import { selectBooks, selectLoading } from '../store/book.selectors';
   imports: [NgFor, NgIf, JsonPipe, BookComponent, BookCreateComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent {
 
