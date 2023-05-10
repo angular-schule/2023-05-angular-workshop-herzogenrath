@@ -8,7 +8,7 @@ import { BookRatingService } from '../shared/book-rating.service';
 import { BooksService } from '../shared/http';
 import { Store } from '@ngrx/store';
 import { BookActions } from '../store/book.actions';
-import { selectBooks, selectLoading } from '../store/book.selectors';
+import { selectAllTitles, selectBooks, selectLoading } from '../store/book.reducer';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +22,7 @@ export class DashboardComponent {
 
   books$ = inject(Store).selectSignal(selectBooks);
   loading$ = inject(Store).selectSignal(selectLoading);
+  alltTitles$ = inject(Store).selectSignal(selectAllTitles);
 
   constructor(private store: Store) {
     this.store.dispatch(BookActions.loadBooks())

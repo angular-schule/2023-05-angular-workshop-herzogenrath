@@ -1,5 +1,5 @@
 /* eslint-disable @ngrx/on-function-explicit-return-type */
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { BookActions } from './book.actions';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
@@ -54,5 +54,18 @@ export const reducer = createReducer(
 export const bookFeature = createFeature({
   name: bookFeatureKey,
   reducer,
+  extraSelectors: ({ selectBooks }) => ({
+    selectAllTitles: createSelector(
+      selectBooks,
+      state => state.map(b => b.title)
+    )
+
+  })
 });
 
+export const {
+  selectBookState,
+  selectBooks,
+  selectLoading,
+  selectAllTitles
+} = bookFeature;
