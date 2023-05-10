@@ -1,10 +1,21 @@
 <app-book-create (create)="addBook($event)"/>
 
-<app-book
-  *ngFor="let b of books"
+<!-- <app-book
+  *ngFor="let b of books$$()"
   [book]="b"
   (rateUp)="doRateUp($event)"
   (rateDown)="doRateDown($event)"
-/>
+/> -->
 
-Anzahl der Bücher: {{ books.length }}
+<h3 *ngIf="loading$$()">Lade Bücher...</h3>
+
+Anzahl der Bücher: {{ books$$().length }}
+
+<hr>
+
+First Book Title: {{ firstBookTitle() }} <br>
+First Book Title 2: {{ getFirstTitle() }}
+
+<hr>
+
+First Book: {{ selectFirstBook$$() | json }}

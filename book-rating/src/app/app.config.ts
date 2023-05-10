@@ -1,12 +1,14 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideState, provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
 import { ApiModule, Configuration } from './shared/http';
-import { provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { BookEffects } from './store/book.effects';
+import { bookFeature } from './store/book.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +18,11 @@ export const appConfig: ApplicationConfig = {
         basePath: 'https://api.angular.schule',
     }))),
     provideStore(),
-    provideEffects(),
+
+    // manuell hinzufügen!
+    provideState(bookFeature),
+    provideEffects(BookEffects),
+
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
 ]
 };
